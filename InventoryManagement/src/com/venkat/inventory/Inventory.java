@@ -6,8 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.venkat.datasource.Line;
 import com.venkat.datasource.Order;
@@ -17,9 +19,11 @@ import com.venkat.response.InventoryServiceResponse;
 public class Inventory {
 	
 	private Map<String, Integer> existingItems;
+	private Set<Integer> serviceCompletedOrders;
 	
 	public Inventory(){
-		existingItems = new HashMap<>();		
+		existingItems = new HashMap<>();	
+		serviceCompletedOrders = new HashSet<>();
 	}
 	
 	public void provideServiceToOrder(Order order){		
@@ -27,11 +31,14 @@ public class Inventory {
 		Map<String, Integer> allotedOrder = new HashMap<>();
 		Map<String, Integer> discardedOrder = new HashMap<>();
 		List<Line> currentOrderLines = order.getListOfLines();
+		if(serviceCompletedOrders.contains(order.getId()))
+			return;
+		serviceCompletedOrders.add(order.getId());
 		for(Line currLine : currentOrderLines){
 			String prodType = currLine.getProductType().toString();
 			int quantity = currLine.getQunatity();
 			int isAllocated = reduceProductSizeFromInventoryForALine(prodType, quantity);
-			requestedOrder.put(prodType, isAllocated);
+			requestedOrder.put(prodType, quantity);
 			if(isAllocated != 0){				
 				allotedOrder.put(prodType, quantity);
 				discardedOrder.put(prodType, 0);
@@ -49,6 +56,8 @@ public class Inventory {
 	
 	public int reduceProductSizeFromInventoryForALine(String productId, int countOfItems){
 		Integer existingProductsCount = existingItems.get(productId);
+		if(existingProductsCount == null)
+			return 0;
 		if(existingProductsCount == 0){
 			existingItems.remove(productId);
 		}
@@ -60,6 +69,12 @@ public class Inventory {
 	
 	public int getExistingItemsSize() {
 		return existingItems.size();
+	}
+	
+	public boolean isInventoryEmpty(){
+		if(getExistingItemsSize() == 0)
+			return true;
+		return false;
 	}
 
 	public void loadInventory(String inventoryInfo) throws IOException, InvalidProductInfoException{		
