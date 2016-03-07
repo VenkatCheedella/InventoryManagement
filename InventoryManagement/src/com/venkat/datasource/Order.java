@@ -2,7 +2,14 @@ package com.venkat.datasource;
 
 import java.util.List;
 
-
+/**
+ * 
+ * @author venkat
+ * Order is POJO to hold an order from stream. 
+ * {"Header": 1, "Lines": {"Product": "A", "Quantity": "1"} -> Example of an order, 
+ *  Here Lines are stored in a List
+ *
+ */
 public class Order {
 	
 	private int id;
