@@ -11,8 +11,16 @@ public class InventoryAllocator implements Callable<Boolean>{
 
 	private BlockingQueue<Order> ordersQueue;
 	private Inventory inventory;	
-
-	InventoryAllocator(BlockingQueue<Order> ordersQueue, String inventoryStockInfo) throws IOException, InvalidProductInfoException{
+	
+	/**
+	 * 
+	 * @param ordersQueue
+	 * @param inventoryStockInfo
+	 * @throws IOException
+	 * @throws InvalidProductInfoException
+	 */
+	public InventoryAllocator(BlockingQueue<Order> ordersQueue, 
+			String inventoryStockInfo) throws IOException, InvalidProductInfoException{
 		this.ordersQueue = ordersQueue;
 		inventory = new Inventory();
 		inventory.loadInventory(inventoryStockInfo);

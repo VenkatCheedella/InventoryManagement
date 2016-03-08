@@ -10,9 +10,9 @@ import java.util.concurrent.Future;
 
 import com.venkat.datasource.Order;
 import com.venkat.datasource.OrderGenerator;
-import com.venkat.datasource.RandomNumberGeneration;
 import com.venkat.exceptions.InvalidProductInfoException;
 import com.venkat.response.InventoryServiceResponse;
+import com.venkat.utility.RandomNumberGeneration;
 
 class OrderProducer implements Runnable{
 

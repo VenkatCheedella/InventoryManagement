@@ -39,15 +39,16 @@ public class InventoryServiceResponse {
 			}
 			orderInfoInString.append("::");
 		}
+		orderInfoInString.delete(orderInfoInString.length()-3, orderInfoInString.length());
 		return orderInfoInString.toString();
 	}
 	
 	public String toString(){
 		Set<Integer> orderIds = orderDeliveryInformation.keySet();
 		StringBuilder builder = new StringBuilder();	
-		builder.append("\nOrder# :" + " ReqOrder " + "    Alloted " + "   ExcessOrder \n");
+		builder.append("\nOrder# " + " ReqOrder " + "    Alloted " + "   ExcessOrder \n");
 		for(Integer orderId: orderIds){
-			builder.append("   " + orderId.toString() + "   : " + retrieveOrderInfo(orderDeliveryInformation.get(orderId)));			
+			builder.append("   " + orderId.toString() + "   " + retrieveOrderInfo(orderDeliveryInformation.get(orderId)));			
 			builder.append("\n");
 		}
 		return builder.toString();

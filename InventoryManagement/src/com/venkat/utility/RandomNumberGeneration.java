@@ -1,7 +1,7 @@
 package com.venkat.utility;
 
 /**
- * It is a utility package to generate Random Number
+ * It is a utility package to generate Random Number.
  */
 
 import java.util.Random;

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.venkat.utility.RandomNumberGeneration;
+import com.venkat.utility.RandomProductTypes;
 
 public class OrderGenerator {
 	
