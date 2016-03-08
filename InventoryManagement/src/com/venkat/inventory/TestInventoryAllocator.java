@@ -12,6 +12,7 @@ import com.venkat.datasource.Order;
 import com.venkat.datasource.OrderGenerator;
 import com.venkat.exceptions.InvalidProductInfoException;
 import com.venkat.response.InventoryServiceResponse;
+import com.venkat.test.InventoryAllocator;
 import com.venkat.utility.RandomNumberGeneration;
 
 class OrderProducer implements Runnable{
